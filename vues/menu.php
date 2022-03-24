@@ -1,4 +1,4 @@
-<!-- Navbar
+[17:33, 24/03/2022] Taieb: <!-- Navbar
     ================================================== -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -38,8 +38,12 @@
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Actions<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                      <li><a href="./supprimer.php">Visiteur</a></li>
-                      <li><a href="./supprimerProduit.php">Produit</a></li>
+                      <li><a href="./MaterielDispo.php">Produits disponibles</a></li>
+                      <li><a href="./restituer.php">Produits empruntés</a></li>
+                      <li><a href="./modifierProduit.php">Restituer un produit</a></li>
+                      <li><a href="./modifierProduit.php">Emprunter un produit</a></li>
+
+                      
                   </ul>
               </li>
               
