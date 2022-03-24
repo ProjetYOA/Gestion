@@ -9,12 +9,7 @@ $repInclude = './include/';
 $repVues = './vues/';
 
 require('./tools/fonction.php');
-  
-// $uneRef=lireDonneePost("ref", "");
-//$uneDes=lireDonneePost("des", "");
-//$unPrix=lireDonneePost("prix", "");
-//$uneImage=lireDonneePost("image", "");
-//$uneCat=lireDonneePost("cat", "");
+
 
 if (count($_POST)==0)
 {

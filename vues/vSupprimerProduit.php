@@ -17,8 +17,8 @@
                     <input  name="ref">
                   </div> -->
                    <div class="field padding-bottom--24">
-                    <label >Nom</label>
-                    <input type="text" name="nom">
+                    <label >Non d'un produit</label>
+                    <input type="text" name="ref">
                   </div>
                   <!-- <div class="field padding-bottom--24">
                     <label >Prénom</label>

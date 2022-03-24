@@ -1,9 +1,15 @@
 <?php
+/** 
+ * Script de contr�le et d'affichage du cas d'utilisation "Ajouter"
+ * @package default
+ * @todo  RAS
+ */
+ 
+$repInclude = './include/';
+$repVues = './vues/';
 
+require('./tools/fonction.php');
 
-// DEBUT du contr�leur ajouter.php
-include("../tools/fonction.php"); 
-include("entete.php");
 if (count($_POST)==0)
 {
   $etape = 1;
@@ -14,8 +20,8 @@ else
   
   $ref=$_POST["ref"];
   $id = GETID($ref);
-  echo $id;
-  $supp= supprimer2($ref);
+  //echo $id;
+  $supp= supprimer($ref);
   // var_dump($supp);
 
 }
@@ -25,22 +31,23 @@ if (isset($_GET['info']))
 {
 $info = $_GET['info'];
 }  
-$invite = lister($info);
+$visiteur = listerVisiteur($info);
 
 
+// Construction de la page Rechercher
+// pour l'affichage (appel des vues)
+include($repVues."entete.php") ;
+include($repVues."menu.php") ;
 
-
-
-// D�but de l'affichage (les vues)
-
-include("entete.php") ;  
-include("../vues/vSupprimer.php");
-include("../vues/vListerProspect.php");
-include("../vues/vListerAdherent.php");
-include("../vues/vListerRecapDon.php");
-include("footer.php");
-
+if ($etape ==1)
+{
+ include($repVues."vSupprimer.php") ; 
+}
+else
+{
+  echo"<br><br>";
+ include($repVues."vListerVisiteur.php") ; 
+}
+include($repVues."pied.php") ;
 ?>
-
-
   

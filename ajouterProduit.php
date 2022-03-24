@@ -34,7 +34,8 @@ else
    $unPrix=$_POST["prix"];
    $uneImage=$_POST["image"];
    $uneCat=$_POST["cat"];  
-  ajouter($uneRef, $uneDes, $unPrix, $uneImage, $uneCat);
+   $uneHauteur=$_POST["hauteur"];  
+  ajouter($uneRef, $uneDes, $unPrix, $uneImage, $uneCat, $uneHauteur);
 }
 
 // Construction de la page Rechercher

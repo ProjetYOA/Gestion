@@ -25,6 +25,7 @@ if (count($produit) > 0)
           <th>NOM</th>
           <th>Prix</th>
           <th>Categorie</th>
+          <th>Hauteur</th>
          
          </tr>
 <?php
@@ -47,6 +48,7 @@ else
             <td><?php echo $produit[$i]['prod_libelle']?></td>
             <td ><?php echo $produit[$i]['prod_prix']?></td>
             <td ><?php echo $produit[$i]['prod_categorie']?></td>
+            <td ><?php echo $produit[$i]['hauteur']?></td>
            
          </tr>
 <?php

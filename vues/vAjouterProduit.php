@@ -40,6 +40,7 @@ function valider(){
     ?>
       
     </select> 
+    <label>Hauteur :</label> <input type="text" name="hauteur" size="20"/><br /> 
   </fieldset>
   <button type="submit" class="btn btn-primary">Enregistrer</button>
   <button type="reset" class="btn">Annuler</button>

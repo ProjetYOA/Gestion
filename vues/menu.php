@@ -55,7 +55,7 @@
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Supprimer<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                      <li><a href="../supprimer.php">Visiteur</a></li>
+                      <li><a href="./supprimer.php">Visiteur</a></li>
                       <li><a href="./supprimerProduit.php">Produit</a></li>
                   </ul>
               </li>

@@ -5,12 +5,13 @@
 <!--Saisie des informations dans un formulaire!-->
 <div class="container">
 
-<form name="formAjouterVisiteur" action="" method="post" onSubmit="return valider()">
-  <fieldset>
+<form name="formAjouterVisiteur" action="" method="post">
+<fieldset>
     <legend>Entrez les coordonnées d'un visiteur pour l'ajouter </legend>
     <input type="hidden" name="matricule" size="20" value="<?php echo $_GET['ID']?>"/><br />
     
-    <label>Produit :</label> <select name="prod" id="">
+    <label>Produit :</label> 
+    <select name="prod" id="">
        
     <?php
                        $i = 0;
@@ -31,4 +32,6 @@
   <p />
 </form>
 </div>
+
+
 
