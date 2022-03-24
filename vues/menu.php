@@ -32,8 +32,8 @@
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Modifier<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                      <li><a href="../php/modifier.php">Visiteur</a></li>
-                      <li><a href="../php/modifierMateriel.php">Produit</a></li>
+                      <li><a href="./modifier.php">Visiteur</a></li>
+                      <li><a href="./modifierProduit.php">Produit</a></li>
                   </ul>
               </li>
               <li class="dropdown">
@@ -48,33 +48,20 @@
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Restituter<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="./listerVisiteur.php">Reserver</a></li>
-                      <li><a href="../php/AjouterEmprunter.php">Restituer</a></li>
+                      <li><a href="./ajouterEmprunter.php">Restituer</a></li>
                       <li><a href="./MaterielDispo.php">Matériel dispo</a></li>
                   </ul>
               </li>
               <li class="dropdown">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Supprimer<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                      <li><a href="../php/supprimer.php">Visiteur</a></li>
-                      <li><a href="../php/supprimerMateriel.php">Produit</a></li>
+                      <li><a href="../supprimer.php">Visiteur</a></li>
+                      <li><a href="./supprimerProduit.php">Produit</a></li>
                   </ul>
               </li>
-              <li class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Supprimer<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                      <li><a href="../php/supprimer.php">Visiteur</a></li>
-                      <li><a href="../php/supprimerMateriel.php">Produit</a></li>
-                  </ul>
-              </li>
-
-             
-
-              
+            
             </ul>
               
-              
-                                         
-           
           </div>
         </div>
       </div>
