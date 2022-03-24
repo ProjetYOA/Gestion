@@ -25,7 +25,7 @@ if (count($produit) > 0)
           <th>NOM</th>
           <th>Prix</th>
           <th>Categorie</th>
-          <th>Hauteur</th>
+          <th>Statut</th>
          
          </tr>
 <?php
