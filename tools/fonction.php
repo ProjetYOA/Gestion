@@ -128,6 +128,7 @@ function listerProduit($type_uti)
           $produit[$i]['prod_libelle']=$ligne->prod_libelle;
           $produit[$i]['prod_prix']=$ligne->prod_prix;
           $produit[$i]['prod_categorie']=$ligne->prod_categorie;
+          $produit[$i]['prod_statut']=$ligne->prod_statut;
          
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
