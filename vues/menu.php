@@ -15,7 +15,7 @@
                 <a href="./index.php">Accueil</a>
               </li>
               <li class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Visiteur<b class="caret"></b></a>
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Visiteurs<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="./listerVisiteur.php">Lister</a></li>
                       <li><a href="./RechercherVisiteur.php">Rechercher</a></li>
@@ -25,7 +25,7 @@
                   </ul>
               </li>
               <li class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Produit<b class="caret"></b></a>
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Produits<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="./listerProduits.php">Lister</a></li>
                       <li><a href="./RechercherProduit.php">Rechercher</a></li>
