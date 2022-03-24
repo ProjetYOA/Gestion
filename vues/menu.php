@@ -45,11 +45,10 @@
                   </ul>
               </li>
               <li class="dropdown">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Restituter<b class="caret"></b></a>
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">Matériel<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                      <li><a href="./listerVisiteur.php">Reserver</a></li>
-                      <li><a href="./ajouterEmprunter.php">Restituer</a></li>
-                      <li><a href="./MaterielDispo.php">Matériel dispo</a></li>
+                      <li><a href="./listerVisiteur.php">Réserver</a></li>
+                      <li><a href="./MaterielDispo.php">Restituer</a></li>
                   </ul>
               </li>
               <li class="dropdown">
