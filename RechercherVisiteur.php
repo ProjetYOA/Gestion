@@ -19,6 +19,7 @@ else
 {
    $etape = 2;
    $uneDes=$_POST["nom"];
+   echo"<br><br>";
    $visiteur=rechercherVisiteur($uneDes);
 }
 

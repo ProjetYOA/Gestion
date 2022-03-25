@@ -10,12 +10,8 @@ include('./tools/fonction.php');
   
 //   require($repInclude . "_init.inc.php");
  
-  $type="";
-  if (isset($_GET['type_uti']))
-  {
-    $type =$_GET['type_uti'];
-  }  
-  $produit = listerProduit($type);
+ 
+  $produit = listerProduit();
   
   // Construction de la page Rechercher
   // pour l'affichage (appel des vues)

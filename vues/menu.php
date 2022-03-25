@@ -1,4 +1,4 @@
-[17:33, 24/03/2022] Taieb: <!-- Navbar
+<!-- Navbar
     ================================================== -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -18,6 +18,7 @@
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Visiteurs<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="./listerVisiteur.php">Lister</a></li>
+                      <li><a href="./ajouterVisiteur.php">Ajouter</a></li>
                       <li><a href="./RechercherVisiteur.php">Rechercher</a></li>
                       <li><a href="./modifier.php">Modifier</a></li>
                       <li><a href="./supprimer.php">Supprimer</a></li>
@@ -28,8 +29,8 @@
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Produits<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="./listerProduits.php">Lister</a></li>
+                      <li><a href="./ajouterProduit.php">Ajouter</a></li>
                       <li><a href="./RechercherProduit.php">Rechercher</a></li>
-                      <li><a href="./modifierProduit.php">Modifier</a></li>
                       <li><a href="./supprimerProduit">Supprimer</a></li>
 
 

@@ -33,6 +33,57 @@ function listerVisiteur()
  
   return $visiteur;
 }
+
+
+function Rendre()
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function listerProduitEmprunter()
+{
+
+  $connexion = connexionBdd();
+  
+  // Si la connexion au SGBD � r�ussi
+  if (TRUE) 
+  {
+      
+           
+      $requete="SELECT p.prod_libelle,p.prod_code,v.VIS_PRENOM,e.emp_dateRetour,e.emp_date,v.VIS_NOM from emprunt e inner join visiteur v on v.VIS_MATRICULE = e.VIS_MATRICULE inner join produit p on e.emp_produit =  p.prod_code;";
+      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le resultat soit recuperable sous forme d'objet     
+      $i = 0;
+      $ligne = $jeuResultat->fetch();
+      while($ligne)
+      {
+        $prod[$i]['VIS_NOM']=$ligne->VIS_NOM;
+        $prod[$i]['prod_libelle']=$ligne->prod_libelle;
+        $prod[$i]['prod_code']=$ligne->prod_code;
+        $prod[$i]['emp_dateRetour']=$ligne->emp_dateRetour;
+        $prod[$i]['emp_date']=$ligne->emp_date;
+        $prod[$i]['VIS_PRENOM']=$ligne->VIS_PRENOM;
+        $ligne=$jeuResultat->fetch();
+        $i = $i + 1;
+    }
+}
+$jeuResultat->closeCursor();   // fermer le jeu de resultat
+
+return $prod;
+  }
+
+
 function statut($prodcode)
 {
   
@@ -41,7 +92,7 @@ function statut($prodcode)
     {
         
              
-        $requete="update produit set Statut = 'ND' where prod_code = '".$prodcode."';";
+        $requete="update produit set Statut = 'Indisponible' where prod_code = '".$prodcode."';";
         $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
           
         
@@ -128,7 +179,10 @@ function listerProduit()
           $produit[$i]['prod_libelle']=$ligne->prod_libelle;
           $produit[$i]['prod_prix']=$ligne->prod_prix;
           $produit[$i]['prod_categorie']=$ligne->prod_categorie;
+          $produit[$i]['prod_image']=$ligne->prod_image;
           $produit[$i]['hauteur']=$ligne->hauteur;
+          $produit[$i]['statut']=$ligne->statut;
+         
          
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
@@ -139,11 +193,7 @@ function listerProduit()
   return $produit;
 }
 
-
-
-function listerProduitDispo($utilisateur
-
-)
+function listerProduitID($ID)
 {
 
   $connexion = connexionBdd();
@@ -151,7 +201,44 @@ function listerProduitDispo($utilisateur
   {
       
            
-      $requete="select * from produit where Statut = 'dispo'";
+      $requete="select * from produit where prod_code = '".$ID."';";
+    
+      
+      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+
+      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+      $i = 0;
+      $ligne = $jeuResultat->fetch();
+      
+      while($ligne)
+      {
+          $produit[$i]['prod_code']=$ligne->prod_code;
+          $produit[$i]['prod_libelle']=$ligne->prod_libelle;
+          $produit[$i]['prod_prix']=$ligne->prod_prix;
+          $produit[$i]['prod_categorie']=$ligne->prod_categorie;
+          $produit[$i]['prod_image']=$ligne->prod_image;
+          $produit[$i]['hauteur']=$ligne->hauteur;
+          $produit[$i]['statut']=$ligne->statut;
+         
+         
+          $ligne=$jeuResultat->fetch();
+          $i = $i + 1;
+      }
+  }
+  $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
+
+  return $produit;
+}
+
+function listerProduitDispo()
+{
+
+  $connexion = connexionBdd();
+  if (TRUE) 
+  {
+      
+           
+      $requete="select * from produit where Statut = 'Disponible';";
     
       
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -170,10 +257,11 @@ function listerProduitDispo($utilisateur
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
       }
-  }
+  
   $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
 
   return $utilisateur;
+    }
 }
 function ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$unCp, $uneDate, $unSec,$unLab)
 {
@@ -236,7 +324,7 @@ function ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$un
       }
       
     }
-function listercat($unecat)
+function listercat()
 {
   $connexion = connexionBdd();
   if(TRUE) 
@@ -331,8 +419,7 @@ function rechercherVisiteur($nom)
   $connexion = connexionBdd();
     $visiteur = array();
       
-    $requete="select * from visiteur";
-      $requete=$requete." where VIS_NOM ='".$nom."';";
+    $requete="select * from visiteur   where VIS_NOM LIKE '".$nom."%';";
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
   
     // Initialisationd e la cat�gorie trouv�e � : "aucune"
@@ -341,11 +428,12 @@ function rechercherVisiteur($nom)
     $invite=0;
     
     $ligne = $jeuResultat->fetch();
-    echo $requete;
+    //echo $requete;
     
     // Si un utilisateur est trouv�, on initialise une variable cat avec la cat�gorie de cet utilisateur trouv�e dans la table utilisateur
     while($ligne)
       {
+        // $visiteur[$i]['matricule']=$ligne['VIS_MATR'];
         $visiteur[$i]['nom']=$ligne['VIS_NOM'];
         $visiteur[$i]['prenom']=$ligne['VIS_PRENOM'];
         $visiteur[$i]['adresse']=$ligne['VIS_ADRESSE'];
@@ -358,13 +446,12 @@ function rechercherVisiteur($nom)
   
   return $visiteur;
 }
-function rechercherProduit($nom)
+function rechercherProduit($uneDes)
 {
   $connexion = connexionBdd();
-    $lutilisateur = array();
+    $produit = array();
       
-    $requete="select * from produit";
-      $requete=$requete." where prod_libelle ='".$nom."';";
+    $requete="select c.cat_nom, p.prod_libelle, p.prod_prix, p.prod_image, p.hauteur, p.statut from produit p inner join categorie c on c.cat_code=p.prod_categorie where prod_libelle like '".$uneDes."%';";
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
   
     // Initialisationd e la cat�gorie trouv�e � : "aucune"
@@ -373,21 +460,23 @@ function rechercherProduit($nom)
     $invite=0;
     
     $ligne = $jeuResultat->fetch();
-    echo $requete;
+    //echo $requete;
     
     // Si un utilisateur est trouv�, on initialise une variable cat avec la cat�gorie de cet utilisateur trouv�e dans la table utilisateur
     while($ligne)
       {
-        $lutilisateur[$i]['prod_code']=$ligne['prod_code'];
-        $lutilisateur[$i]['prod_libelle']=$ligne['prod_libelle'];
-        $lutilisateur[$i]['prod_prix']=$ligne['prod_prix'];
-        $lutilisateur[$i]['prod_categorie']=$ligne['prod_categorie'];
+        $produit[$i]['cat_nom']=$ligne['cat_nom'];
+        $produit[$i]['prod_libelle']=$ligne['prod_libelle'];
+        $produit[$i]['prod_prix']=$ligne['prod_prix'];
+        $produit[$i]['prod_image']=$ligne['prod_image'];
+        $produit[$i]['hauteur']=$ligne['hauteur'];
+        $produit[$i]['statut']=$ligne['statut'];
         $ligne=$jeuResultat->fetch();
         $i = $i + 1;
       }
     $jeuResultat->closeCursor();   // fermer le jeu de r�sultat
   
-  return $lutilisateur;
+  return $produit;
 }
 
 
@@ -395,17 +484,17 @@ function GETID($ref)
 {
   $connexion = connexionBdd();
     
-  $tabVisiteur = array();
+  $tabProduit = array();
   $requete="select vis_matricule from visiteur  where vis_nom='".$ref."';";
     //echo $requete;
     $jeuResultat=$connexion->query($requete);
    $ligne = $jeuResultat->fetch();
    if($ligne)
    {
-     $tabVisiteur = $ligne['vis_matricule'];
+     $tabProduit = $ligne['vis_matricule'];
      
    }
-   return($tabVisiteur);
+   return($tabProduit);
 }
 
 function supprimer($ref)
@@ -492,6 +581,45 @@ function modifierVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$u
             $message = "L'invite n'a pas ete modifie !!!";
           //   ajouterErreur($tabErr, $message);
           } 
+
+      }
+
+
+
+function modifierProduit($uneRef,$unNom,$unPrix,$uneCat,$uneHauteur)
+
+{
+
+    // Ouvrir une connexion au serveur mysql en s'identifiant
+    $connexion = connecterServeurBD();
+    
+    // V�rifier que la r�f�rence saisie n'existe pas d�ja
+    $requete="select * from produit";
+    $requete=$requete." where prod_code = '".$ref."';";              
+   
+    $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+  
+    //$jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
+    
+    $ligne = $jeuResultat->fetch();
+    // Cr�er la requ�te de modification 
+  
+    $requete= "UPDATE produit SET prod_libelle = '$unNom', prod_pri` = ".$unprix.", hauteur =".$uneHauteur." WHERE `id`='$ref';";
+         
+    // Lancer la requ�te d'ajout 
+    $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+      
+    // Si la requ�te a r�ussi
+    if ($ok)
+    {
+      $message = "Le materiel a été correctement modifier";
+      ajouterErreur($tabErr, $message);
+    }
+    else
+    {
+      $message = "Attention, la modification du materielle a echoué!!!";
+      ajouterErreur($tabErr, $message);
+    } 
 
       }
 

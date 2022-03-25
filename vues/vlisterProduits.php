@@ -21,10 +21,11 @@ if (count($produit) > 0)
 {
 ?>
         <tr>
-          <th>Code Produit</th>
-          <th>NOM</th>
+          <th>catégorie</th>
+          <th>Nom</th>
           <th>Prix</th>
-          <th>Categorie</th>
+          <th>Image</th>
+          <th>Hauteur</th>
           <th>Statut</th>
          
          </tr>
@@ -43,12 +44,13 @@ else
     { 
  ?>     
         <tr>
-            
-            <td><?php echo $produit[$i]['prod_code']?></td>
+            <td><a href="./modifierProduit.php?ID=<?php echo $produit[$i]['prod_code']?>"><?php echo $produit[$i]['prod_code']?></a></td>
+            <td><?php echo $produit[$i]['prod_libelle']?></td>
             <td><?php echo $produit[$i]['prod_libelle']?></td>
             <td ><?php echo $produit[$i]['prod_prix']?></td>
-            <td ><?php echo $produit[$i]['prod_categorie']?></td>
+            <td ><?php echo $produit[$i]['prod_image']?></td>
             <td ><?php echo $produit[$i]['hauteur']?></td>
+            <td ><?php echo $produit[$i]['statut']?></td>
            
          </tr>
 <?php

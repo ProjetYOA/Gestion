@@ -1,101 +1,54 @@
 <?php
+/** 
+ * Script de contr�le et d'affichage du cas d'utilisation "Ajouter"
+ * @package default
+ * @todo  RAS
+ */
+ 
+ 
+// Initialise les ressources n�cessaires au fonctionnement de l'application
+
+//   $repVues = './vues/';
+include("tools/fonction.php"); 
+  // d�marrage ou reprise de la session
+//   ophp/n();
+  // initialement, aucune erreur ...
+  $tabErreurs = array();
 
 
-include("../tools/fonction.php"); 
+// DEBUT du contr�leur rechercher.php 
 
-    
-    if($_GET['ID']=="")
-    {
-      $etape=1;
-    }
-    else
-    {
-      $unIdVisiteur=$_GET["ID"];
-      $infos=array();
-      if(isset($_POST['infos']))
-      {
-        $infos=$_POST['infos'];
-        
-      }  
-      $visiteur=listerVisiteur($categ);
-      if(count($invites)<=0)
-       {
-      $etape = 1;
-      }
-      else
-      {
-        $etape=2;
-      }
-      
-      if(count($_POST)>=6)
+if(count($_POST)>=6)
       {
         $etape = 3;
-        $unIdDon=$_GET["ID"];
-        $unLibelle=$_POST["Libelle"];
-        $unType=$_POST["Type_Dons"];
-        $unMontant=$_POST["montant"];
-        // $unPaiement=$_POST["paiement"];
-        $unRegle=$_POST["typeReglement"];
-        $unEstPaye=$_POST['estRegle'];
-        $unDate=$_POST["date"];
-        $unCom=$_POST["com"];
+        $unMatricule=$_GET["matricule"];
+        $unNom=$_POST["nom"];
+        $unPrenom=$_POST["prenom"];
+        $uneAdresse=$_POST["adresse"];
+        $uneDate=$_POST["date"];
+        $unCp=$_POST['cp'];
+        $uneVille=$_POST["ville"];
+        $unSec=$_POST["sec"];
+        $unLab=$_POST["code"];
        
         
-        modifierDon($unIdDon,$unLibelle,$unType,$unMontant,$unRegle,$unEstPaye,$unDate,$unCom);
-        
+        modifierVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$unCp, $uneDate, $unSec,$unLab);
+        header("Location:listerVisiteur.php");
       }
-   
-      }
-
-
-      
-      
-    
-    
-  // }
-// }
-
-
-  
- 
-
-  
-
-$infoss=array();
-if (isset($_GET['ID']))
-{
-$infoss=$_GET['ID'];
-}  
-$visiteur =modifierVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$unCp, $uneDate, $unSec,$unLab);
-
-$don =  lister_dons($_GET['ID']);
-
-  
-  
-
 
 // D�but de l'affichage (les vues)
 
-include("entete.php");
+include("vues/entete.php");
+include("vues/menu.php");
 
-if($etape==3)
-{
-  
-  include("../vues/vListerVisiteur.php");
-  
-}
+ 
+
+//   include("vues/vModifierVisiteur.php");
+
 if($etape==1)
 {
-  include("../vues/vModifierVisiteur.php");
-  include("../vues/vListerVisiteur.php");
-  
+   include("vues/vModifierProduit.php");
 }
-if($etape==2)
-{
-    include("../vues/vModifierVisiteur.php");
-    include("../vues/vListerVisiteur.php");
-}
-
-
+include("vues/pied.php") ;
 ?>
-  
+

@@ -24,7 +24,8 @@ else
 {
    $etape = 2;
    $uneDes=$_POST["nom"];
-   $lutilisateur=rechercherProduit($uneDes);
+   echo"<br><br>";
+   $produit=rechercherProduit($uneDes);
 }
 
 // Construction de la page Rechercher
