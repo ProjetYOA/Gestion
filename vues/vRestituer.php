@@ -30,13 +30,15 @@ if (count($prod) > 0)
 }
 else
 {
- echo "<h1>Aucun client ne correspond � votre recherche</h1>";
+ echo "<h2>Message erreur</h2>";
 }
 ?>
       </thead>
       <tbody>  
 <?php  
     $i = 0;
+    echo "<h2>Restituer un produit :</h2>";
+    echo "<br><br>";
     echo date('d-m-y h:i:s'); //date du jours
     while($i < count($prod))
     { 

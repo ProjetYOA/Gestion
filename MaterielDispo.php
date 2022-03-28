@@ -15,7 +15,7 @@ include('./tools/fonction.php');
   {
     $type =$_GET['type_uti'];
   }  
-  $lutilisateur = listerProduitDispo($type);
+  $produit = listerProduitDispo();
   
   // Construction de la page Rechercher
   // pour l'affichage (appel des vues)

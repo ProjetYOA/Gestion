@@ -33,12 +33,47 @@ function listerVisiteur()
  
   return $visiteur;
 }
-
-
-function Rendre()
+function listerVisiteurID($ID)
 {
+  $connexion = connexionBdd();
+  
+  // Si la connexion au SGBD � r�ussi
+  if (TRUE) 
+  {
+      
+           
+      $requete="select vis_nom,sec_code, lab_code,VIS_MATRICULE,vis_dateembauche, vis_prenom, vis_adresse, vis_ville, vis_cp from visiteur where VIS_MATRICULE = '".$ID."';";
+  
+      
+      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
+      
+      
 
+      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le resultat soit recuperable sous forme d'objet     
+      $i = 0;
+      $ligne = $jeuResultat->fetch();
+
+      while($ligne)
+      {
+          $visiteur[$i]['nom']=$ligne->vis_nom;
+          $visiteur[$i]['date']=$ligne->vis_dateembauche;
+          $visiteur[$i]['code']=$ligne->sec_code;
+          $visiteur[$i]['lab']=$ligne->lab_code;
+          
+          $visiteur[$i]['prenom']=$ligne->vis_prenom;
+          $visiteur[$i]['adresse']=$ligne->vis_adresse;
+          $visiteur[$i]['ville']=$ligne->vis_ville;
+          $visiteur[$i]['cp']=$ligne->vis_cp;
+          $visiteur[$i]['VIS_MATRICULE']=$ligne->VIS_MATRICULE;
+          $ligne=$jeuResultat->fetch();
+          $i = $i + 1;
+      }
+  }
+  $jeuResultat->closeCursor();   // fermer le jeu de resultat
+ 
+  return $visiteur;
 }
+
 
 
 
@@ -60,9 +95,9 @@ function listerProduitEmprunter()
   {
       
            
-      $requete="SELECT p.prod_libelle,p.prod_code,v.VIS_PRENOM,e.emp_dateRetour,e.emp_date,v.VIS_NOM from emprunt e inner join visiteur v on v.VIS_MATRICULE = e.VIS_MATRICULE inner join produit p on e.emp_produit =  p.prod_code;";
+      $requete="SELECT p.prod_libelle,p.prod_code,v.VIS_PRENOM,e.emp_dateRetour,e.emp_date,v.VIS_NOM from emprunt e inner join visiteur v on v.VIS_MATRICULE = e.VIS_MATRICULE inner join produit p on e.emp_produit =  p.prod_code where e.statut='' or  e.statut='a rendre';";
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
-
+       $prod= array();
       $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le resultat soit recuperable sous forme d'objet     
       $i = 0;
       $ligne = $jeuResultat->fetch();
@@ -229,7 +264,26 @@ function listerProduitID($ID)
 
   return $produit;
 }
+function rendre($ID)
+{
 
+  $connexion = connexionBdd();
+  if (TRUE) 
+  {
+      
+        $a= date('d-m-y');
+      $requete="update emprunt set statut ='Rendu',emp_dateRetour=$a where emp_produit=$ID; update produit set statut  = 'Disponible' ;";
+       
+      $jeuResultat=$connexion->query($requete);
+      echo $requete;
+
+  }
+
+
+
+
+
+}    
 function listerProduitDispo()
 {
 
@@ -253,6 +307,9 @@ function listerProduitDispo()
           $utilisateur[$i]['prod_libelle']=$ligne->prod_libelle;
           $utilisateur[$i]['prod_prix']=$ligne->prod_prix;
           $utilisateur[$i]['prod_categorie']=$ligne->prod_categorie;
+          $utilisateur[$i]['hauteur']=$ligne->hauteur;
+          $utilisateur[$i]['statut']=$ligne->statut;
+          $utilisateur[$i]['image']=$ligne->prod_image;
          
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
@@ -562,8 +619,8 @@ function modifierVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$u
       
       
           //VIS_MATRICULE,VIS_NOM ,VIS_PRENOM, VIS_ADRESSE, VIS_CP, VIS_VILLE, VIS_DATEEMBAUCHE, SEC_CODE, LAB_CODE
-        $requete="UPDATE participant SET ";
-        $requete=$requete."VIS_MATRICULE='".$unMatricule."',VIS_NOM='".$unNom."',VIS_PRENOM='".$unPrenom."',VIS_ADRESSE='".$uneAdresse."',VIS_VILLE='".$uneVille."', VIS_CP='".$unCp."',VIS_DATEEMBAUCHE='".$uneDate."',SEC_CODE='".$unSec."',LAB_CODE='".$unLab."';";
+        $requete="SET FOREIGN_KEY_CHECKS = 0; UPDATE visiteur SET ";
+        $requete=$requete."VIS_MATRICULE='".$unMatricule."',VIS_NOM='".$unNom."',VIS_PRENOM='".$unPrenom."',VIS_ADRESSE='".$uneAdresse."',VIS_VILLE='".$uneVille."', VIS_CP='".$unCp."',VIS_DATEEMBAUCHE='".$uneDate."',SEC_CODE='".$unSec."',LAB_CODE='".$unLab."' where VIS_MATRICULE = '".$unMatricule."';";
         // echo $requete;
         
           // Lancer la requ�te d'ajout 

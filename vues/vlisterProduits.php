@@ -21,6 +21,7 @@ if (count($produit) > 0)
 {
 ?>
         <tr>
+          <th>ID</th>
           <th>catégorie</th>
           <th>Nom</th>
           <th>Prix</th>
@@ -48,7 +49,7 @@ else
             <td><?php echo $produit[$i]['prod_libelle']?></td>
             <td><?php echo $produit[$i]['prod_libelle']?></td>
             <td ><?php echo $produit[$i]['prod_prix']?></td>
-            <td ><?php echo $produit[$i]['prod_image']?></td>
+            <td ><img src="<?php echo $produit[$i]['image']?>" alt=""></td>
             <td ><?php echo $produit[$i]['hauteur']?></td>
             <td ><?php echo $produit[$i]['statut']?></td>
            

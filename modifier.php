@@ -14,14 +14,15 @@ include("tools/fonction.php");
 //   ophp/n();
   // initialement, aucune erreur ...
   $tabErreurs = array();
-
+  $ID = $_GET['ID'];
+ $visit =  listerVisiteurID($ID);
 
 // DEBUT du contr�leur rechercher.php 
 
 if(count($_POST)>=6)
       {
-        $etape = 3;
-        $unMatricule=$_GET["matricule"];
+        // $etape = 3;
+        $unMatricule=$_GET["ID"];
         $unNom=$_POST["nom"];
         $unPrenom=$_POST["prenom"];
         $uneAdresse=$_POST["adresse"];
@@ -45,10 +46,9 @@ include("vues/menu.php");
 
 //   include("vues/vModifierVisiteur.php");
 
-if($etape==1)
-{
-   include("vues/vModifierProduit.php");
-}
+
+   include("vues/vModifierVisiteur.php");
+
 include("vues/pied.php") ;
 ?>
 

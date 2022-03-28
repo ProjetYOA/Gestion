@@ -17,6 +17,7 @@ function valider(){
 }
 //]]>
 </script>
+<h3>Modifier un Produit :</h3>
 
 <!--Saisie des informations dans un formulaire!-->
 <div class="container">
@@ -24,7 +25,7 @@ function valider(){
 <form name="formAjout" action="" method="post" onSubmit="return valider()">
   <fieldset>
     <legend>Modifierr Produit</legend>
-    <label>Code du Produit : </label> <label type="text" placeholder="Entrer la r�f�rence �"name="ref" size="10" ><?php echo $ID;?></label><br />
+    <label>Code du Produit : </label> <label><?php echo $ID;?></label><br />
     <label>Nom :</label> <input type="text" name="des" size="20" value="<?php echo $modif[0]['prod_libelle']; ?>" /><br />
     <label>Prix :</label> <input type="text" name="prix" size="10" value="<?php echo $modif[0]['prod_prix'];?>" /><br />
     <!-- <label>Image :</label> <input type="text" name="image" size="20"/><br />     -->

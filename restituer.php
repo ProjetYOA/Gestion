@@ -14,6 +14,10 @@ $repVues = './vues/';
 
   $etape = 2;
   $prod = listerProduitEmprunter();
+  if(count($prod)==0)
+  {
+    echo "ALERTE ROUGE";
+  }
 
 include($repVues."entete.php") ;
 include($repVues."menu.php") ;
