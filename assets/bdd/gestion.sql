@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : lun. 03 jan. 2022 à 22:25
--- Version du serveur : 10.4.21-MariaDB
--- Version de PHP : 7.4.25
+-- Host: 127.0.0.1
+-- Generation Time: Mar 29, 2022 at 02:08 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `gestion`
+-- Database: `gestion`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categorie`
+-- Table structure for table `categorie`
 --
 
 CREATE TABLE `categorie` (
@@ -32,23 +32,49 @@ CREATE TABLE `categorie` (
   `cat_nom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `categorie`
+--
+
+INSERT INTO `categorie` (`cat_code`, `cat_nom`) VALUES
+(1, 'DIAGNOSTIC GENERAL'),
+(2, 'DIAGNOSTIC SPECIALISE'),
+(3, 'MOBILIER - EQUIPEMENT DU CABINET');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `emprunt`
+-- Table structure for table `emprunt`
 --
 
 CREATE TABLE `emprunt` (
   `emp_date` date DEFAULT NULL,
   `emp_produit` int(11) NOT NULL,
   `emp_dateRetour` date NOT NULL,
-  `VIS_MATRICULE` char(10) NOT NULL
+  `VIS_MATRICULE` char(10) NOT NULL,
+  `statut` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emprunt`
+--
+
+INSERT INTO `emprunt` (`emp_date`, `emp_produit`, `emp_dateRetour`, `VIS_MATRICULE`, `statut`) VALUES
+('2022-12-01', 14, '0000-00-00', 'COH', 'Rendu'),
+('2021-12-02', 7, '0000-00-00', 'DAD', 'Rendu'),
+('2021-12-12', 4, '0000-00-00', 'ABK', 'Rendu'),
+('0000-00-00', 5, '0000-00-00', 'SRO', 'Rendu'),
+('2022-02-01', 13, '0000-00-00', 'HAY', 'Rendu'),
+('2021-06-14', 11, '0000-00-00', 'SEB', 'Rendu'),
+('2021-10-19', 6, '0000-00-00', 'FEL', 'Rendu'),
+('2022-03-17', 1, '0000-00-00', 'FEL', 'Rendu'),
+('2022-03-10', 15, '0000-00-00', 'ABK', 'Rendu'),
+('2022-03-10', 2, '0000-00-00', 'COH', 'Rendu');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `produit`
+-- Table structure for table `produit`
 --
 
 CREATE TABLE `produit` (
@@ -56,13 +82,38 @@ CREATE TABLE `produit` (
   `prod_libelle` varchar(255) NOT NULL,
   `prod_prix` float NOT NULL,
   `prod_image` varchar(255) NOT NULL,
-  `prod_categorie` int(11) NOT NULL
+  `prod_categorie` int(11) NOT NULL,
+  `statut` varchar(255) DEFAULT NULL,
+  `hauteur` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `produit`
+--
+
+INSERT INTO `produit` (`prod_code`, `prod_libelle`, `prod_prix`, `prod_image`, `prod_categorie`, `statut`, `hauteur`) VALUES
+(1, 'Abaisse langue', 1.63, 'https://www.realme.fr/c/295-category_default/Abaisse%20langue.jpg', 1, 'Disponible', 12),
+(2, 'Lampe stylo', 9.5, 'https://www.realme.fr/3661-home_default/lampe-stylo-holtex.jpg', 1, 'Disponible', NULL),
+(3, 'marteau reflexe', 6.53, 'https://www.realme.fr/3825-home_default/marteau-a-reflexes-babinski.jpg', 1, 'Disponible', 13),
+(4, 'Moniteurs de signes vitaux', 1.8, 'https://www.realme.fr/6828-home_default/moniteur-signes-vitaux-edan-m3a.jpg', 1, 'Disponible', NULL),
+(5, 'Oxymètre de pouls', 28.5, 'https://www.realme.fr/10204-home_default/oxymetre-frafito-oxyone-neo.jpg', 1, 'Disponible', 11),
+(6, 'Stéthoscope', 14.15, 'https://www.realme.fr/2985-home_default/stethoscope-rappaport.jpg', 1, 'Disponible', 15),
+(7, 'Audiométrie', 615, 'https://www.realme.fr/3896-home_default/audiometre-electronica-auditest.jpg', 2, 'Disponible', 20),
+(8, 'Dermatoscope', 216, 'https://www.realme.fr/c/235-category_default/dermatoscope.jpg', 2, 'Disponible', NULL),
+(9, 'Electrocardiographe', 549, 'https://www.realme.fr/9123-home_default/electrocardiographe-portable-colson-cardi-touch.jpg', 2, 'Disponible', 1),
+(10, 'Pèse-personne mécanique', 267, 'https://www.realme.fr/2741-large_default/pese-personne-medical-pese-personne-mecanique.jpg', 2, 'Disponible', NULL),
+(11, 'Armoire à pharmacie', 369, 'https://www.realme.fr/5339-home_default/armoire-a-pharmacie-murale.jpg', 3, 'Disponible', NULL),
+(12, 'Divan d\'examen médical - Table d\'examen', 380, 'https://www.realme.fr/8842-home_default/divan-d-examen-holtex-acier-inoxydable.jpg', 3, 'Disponible', NULL),
+(13, 'Chariots et guéridons médicaux', 1, 'https://www.realme.fr/10923-home_default/chariot-d-urgence-inox.jpg', 3, 'Disponible', NULL),
+(14, 'Lampe d\'examen', 316.8, 'https://www.realme.fr/8122-home_default/lampe-d-examen-led-lumiere-froide-lid.jpg', 3, 'Disponible', NULL),
+(15, 'Tabouret médical', 123.05, 'https://www.realme.fr/5408-home_default/tabouret-commande-manuelle-ref-3600.jpg', 3, 'Disponible', NULL),
+(16, 'test', 1, '', 1, 'Disponible', 2),
+(18, 'test', 1, '', 1, 'Disponible', 11);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `visiteur`
+-- Table structure for table `visiteur`
 --
 
 CREATE TABLE `visiteur` (
@@ -78,105 +129,47 @@ CREATE TABLE `visiteur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `visiteur`
+-- Dumping data for table `visiteur`
 --
 
 INSERT INTO `visiteur` (`VIS_MATRICULE`, `VIS_NOM`, `VIS_PRENOM`, `VIS_ADRESSE`, `VIS_CP`, `VIS_VILLE`, `VIS_DATEEMBAUCHE`, `SEC_CODE`, `LAB_CODE`) VALUES
-('a131', 'Villechalane', 'Louis', '8 cours Lafontaine', '29000', 'BREST', '0000-00-00 00:00:00', '', 'SW'),
-('a17', 'Andre', 'David', '1 r Aimon de Chiss', '38100', 'GRENOBLE', '0000-00-00 00:00:00', '', 'GY'),
-('a55', 'Bedos', 'Christian', '1 r B', '65000', 'TARBES', '0000-00-00 00:00:00', '', 'GY'),
-('a93', 'Tusseau', 'Louis', '22 r Renou', '86000', 'POITIERS', '0000-00-00 00:00:00', '', 'SW'),
-('aaa', 'aaa', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('b13', 'Bentot', 'Pascal', '11 av 6 Juin', '67000', 'STRASBOURG', '0000-00-00 00:00:00', '', 'GY'),
-('b16', 'Bioret', 'Luc', '1 r Linne', '35000', 'RENNES', '0000-00-00 00:00:00', '', 'SW'),
-('b19', 'Bunisset', 'Francis', '10 r Nicolas Chorier', '85000', 'LA ROCHE SUR YON', '0000-00-00 00:00:00', '', 'GY'),
-('b25', 'Bunisset', 'Denise', '1 r Lionne', '49100', 'ANGERS', '0000-00-00 00:00:00', '', 'SW'),
-('b28', 'Cacheux', 'Bernard', '114 r Authie', '34000', 'MONTPELLIER', '0000-00-00 00:00:00', '', 'GY'),
-('b34', 'Cadic', 'Eric', '123 r Caponi', '41000', 'BLOIS', '0000-00-00 00:00:00', 'P', 'SW'),
-('b4', 'Charoze', 'Catherine', '100 pl G', '33000', 'BORDEAUX', '0000-00-00 00:00:00', '', 'SW'),
-('b50', 'Clepkens', 'Christophe', '12 r F', '13000', 'MARSEILLE', '0000-00-00 00:00:00', '', 'SW'),
-('b59', 'Cottin', 'Vincenne', '36 sq Capucins', '5000', 'GAP', '0000-00-00 00:00:00', '', 'GY'),
-('c14', 'Daburon', 'Fran', '13 r Champs Elys', '6000', 'NICE', '0000-00-00 00:00:00', 'S', 'SW'),
-('c3', 'De', 'Philippe', '13 r Charles Peguy', '10000', 'TROYES', '0000-00-00 00:00:00', '', 'SW'),
-('c54', 'Debelle', 'Michel', '181 r Caponi', '88000', 'EPINAL', '0000-00-00 00:00:00', '', 'SW'),
-('d13', 'Debelle', 'Jeanne', '134 r Stalingrad', '44000', 'NANTES', '0000-00-00 00:00:00', '', 'SW'),
-('d51', 'Debroise', 'Michel', '2 av 6 Juin', '70000', 'VESOUL', '0000-00-00 00:00:00', 'E', 'GY'),
-('e22', 'Desmarquest', 'Nathalie', '14 r F', '54000', 'NANCY', '0000-00-00 00:00:00', '', 'GY'),
-('e24', 'Desnost', 'Pierre', '16 r Barral de Montferrat', '55000', 'VERDUN', '0000-00-00 00:00:00', 'E', 'SW'),
-('e39', 'Dudouit', 'Fr', '18 quai Xavier Jouvin', '75000', 'PARIS', '0000-00-00 00:00:00', '', 'GY'),
-('e49', 'Duncombe', 'Claude', '19 av Alsace Lorraine', '9000', 'FOIX', '0000-00-00 00:00:00', '', 'GY'),
-('e5', 'Enault-Pascreau', 'C', '25B r Stalingrad', '40000', 'MONT DE MARSAN', '0000-00-00 00:00:00', 'S', 'GY'),
-('e52', 'Eynde', 'Val', '3 r Henri Moissan', '76000', 'ROUEN', '0000-00-00 00:00:00', '', 'GY'),
-('f21', 'Finck', 'Jacques', 'rte Montreuil Bellay', '74000', 'ANNECY', '0000-00-00 00:00:00', '', 'SW'),
-('f39', 'Fr', 'Fernande', '4 r Jean Giono', '69000', 'LYON', '0000-00-00 00:00:00', '', 'GY'),
-('f4', 'Gest', 'Alain', '30 r Authie', '46000', 'FIGEAC', '0000-00-00 00:00:00', '', 'GY'),
-('g19', 'Gheysen', 'Galassus', '32 bd Mar Foch', '75000', 'PARIS', '0000-00-00 00:00:00', '', 'SW'),
-('g30', 'Girard', 'Yvon', '31 av 6 Juin', '80000', 'AMIENS', '0000-00-00 00:00:00', 'N', 'GY'),
-('g53', 'Gombert', 'Luc', '32 r Emile Gueymard', '56000', 'VANNES', '0000-00-00 00:00:00', '', 'GY'),
-('g7', 'Guindon', 'Caroline', '40 r Mar Montgomery', '87000', 'LIMOGES', '0000-00-00 00:00:00', '', 'GY'),
-('h13', 'Guindon', 'Fran', '44 r Picoti', '19000', 'TULLE', '0000-00-00 00:00:00', '', 'SW'),
-('h30', 'Igigabel', 'Guy', '33 gal Arlequin', '94000', 'CRETEIL', '0000-00-00 00:00:00', '', 'SW'),
-('h35', 'Jourdren', 'Pierre', '34 av Jean Perrot', '15000', 'AURRILLAC', '0000-00-00 00:00:00', '', 'GY'),
-('h40', 'Juttard', 'Pierre-Raoul', '34 cours Jean Jaur', '8000', 'SEDAN', '0000-00-00 00:00:00', '', 'GY'),
-('j45', 'Labour', 'Saout', '38 cours Berriat', '52000', 'CHAUMONT', '0000-00-00 00:00:00', 'N', 'SW'),
-('j50', 'Landr', 'Philippe', '4 av G', '59000', 'LILLE', '0000-00-00 00:00:00', '', 'GY'),
-('j8', 'Langeard', 'Hugues', '39 av Jean Perrot', '93000', 'BAGNOLET', '0000-00-00 00:00:00', 'P', 'GY'),
-('k4', 'Lanne', 'Bernard', '4 r Bayeux', '30000', 'NIMES', '0000-00-00 00:00:00', '', 'SW'),
-('k53', 'Le', 'No', '4 av Beauvert', '68000', 'MULHOUSE', '0000-00-00 00:00:00', '', 'SW'),
-('l14', 'Le', 'Jean', '39 r Raspail', '53000', 'LAVAL', '0000-00-00 00:00:00', '', 'SW'),
-('l23', 'Leclercq', 'Servane', '11 r Quinconce', '18000', 'BOURGES', '0000-00-00 00:00:00', '', 'SW'),
-('l46', 'Lecornu', 'Jean-Bernard', '4 bd Mar Foch', '72000', 'LA FERTE BERNARD', '0000-00-00 00:00:00', '', 'GY'),
-('l56', 'Lecornu', 'Ludovic', '4 r Abel Servien', '25000', 'BESANCON', '0000-00-00 00:00:00', '', 'SW'),
-('m35', 'Lejard', 'Agn', '4 r Anthoard', '82000', 'MONTAUBAN', '0000-00-00 00:00:00', '', 'SW'),
-('m45', 'Lesaulnier', 'Pascal', '47 r Thiers', '57000', 'METZ', '0000-00-00 00:00:00', '', 'SW'),
-('n42', 'Letessier', 'St', '5 chem Capuche', '27000', 'EVREUX', '0000-00-00 00:00:00', '', 'GY'),
-('n58', 'Loirat', 'Didier', 'Les P', '45000', 'ORLEANS', '0000-00-00 00:00:00', '', 'GY'),
-('n59', 'Maffezzoli', 'Thibaud', '5 r Chateaubriand', '2000', 'LAON', '0000-00-00 00:00:00', '', 'SW'),
-('o26', 'Mancini', 'Anne', '5 r D\'Agier', '48000', 'MENDE', '0000-00-00 00:00:00', '', 'GY'),
-('p32', 'Marcouiller', 'G', '7 pl St Gilles', '91000', 'ISSY LES MOULINEAUX', '0000-00-00 00:00:00', '', 'GY'),
-('p40', 'Michel', 'Jean-Claude', '5 r Gabriel P', '61000', 'FLERS', '0000-00-00 00:00:00', 'O', 'SW'),
-('p41', 'Montecot', 'Fran', '6 r Paul Val', '17000', 'SAINTES', '0000-00-00 00:00:00', '', 'GY'),
-('p42', 'Notini', 'Veronique', '5 r Lieut Chabal', '60000', 'BEAUVAIS', '0000-00-00 00:00:00', '', 'SW'),
-('p49', 'Onfroy', 'Den', '5 r Sidonie Jacolin', '37000', 'TOURS', '0000-00-00 00:00:00', '', 'GY'),
-('p6', 'Pascreau', 'Charles', '57 bd Mar Foch', '64000', 'PAU', '0000-00-00 00:00:00', '', 'SW'),
-('p7', 'Pernot', 'Claude-No', '6 r Alexandre 1 de Yougoslavie', '11000', 'NARBONNE', '0000-00-00 00:00:00', '', 'SW'),
-('p8', 'Perrier', 'Ma', '6 r Aubert Dubayet', '71000', 'CHALON SUR SAONE', '0000-00-00 00:00:00', '', 'GY'),
-('q17', 'Petit', 'Jean-Louis', '7 r Ernest Renan', '50000', 'SAINT LO', '0000-00-00 00:00:00', '', 'GY'),
-('r24', 'Piquery', 'Patrick', '9 r Vaucelles', '14000', 'CAEN', '0000-00-00 00:00:00', 'O', 'GY'),
-('r58', 'Quiquandon', 'Jo', '7 r Ernest Renan', '29000', 'QUIMPER', '0000-00-00 00:00:00', '', 'GY'),
-('s10', 'Retailleau', 'Josselin', '88Bis r Saumuroise', '39000', 'DOLE', '0000-00-00 00:00:00', '', 'SW'),
-('s21', 'Retailleau', 'Pascal', '32 bd Ayrault', '23000', 'MONTLUCON', '0000-00-00 00:00:00', '', 'SW'),
-('t43', 'Souron', 'Maryse', '7B r Gay Lussac', '21000', 'DIJON', '0000-00-00 00:00:00', '', 'SW'),
-('t47', 'Tiphagne', 'Patrick', '7B r Gay Lussac', '62000', 'ARRAS', '0000-00-00 00:00:00', '', 'SW'),
-('t55', 'Tr', 'Alain', '7D chem Barral', '12000', 'RODEZ', '0000-00-00 00:00:00', '', 'SW'),
-('t60', 'Tusseau', 'Josselin', '63 r Bon Repos', '28000', 'CHARTRES', '0000-00-00 00:00:00', '', 'GY');
+('ABK', 'Abecassis', 'Deborah', '12', '94000', 'Creteil', '2022-02-22 21:52:35', '2', '12'),
+('COH', 'cohen', 'raphael', NULL, NULL, NULL, '2022-02-22 21:51:35', NULL, NULL),
+('DAD', 'dadoune', 'anaia', NULL, NULL, NULL, '2022-02-22 21:51:55', NULL, NULL),
+('FEL', 'fellous', 'david', NULL, NULL, NULL, '2022-02-22 21:51:05', NULL, NULL),
+('HAY', 'hayat', 'jordan', NULL, NULL, NULL, '2022-02-22 21:52:22', NULL, NULL),
+('MAR', 'marciano', 'ariel', '', '', '', '0000-00-00 00:00:00', '', ''),
+('NIZ', 'nizard', 'david', '', '', '', '2022-02-22 21:51:17', '', ''),
+('SEB', 'sebban', 'nathane', NULL, NULL, NULL, '2022-02-22 21:50:46', NULL, NULL),
+('SRO', 'sroussi', 'nathan', NULL, NULL, NULL, '2022-02-22 21:47:57', NULL, NULL),
+('TEST', 'test', 'test', '', '', '', '0000-00-00 00:00:00', '', '');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `categorie`
+-- Indexes for table `categorie`
 --
 ALTER TABLE `categorie`
   ADD PRIMARY KEY (`cat_code`);
 
 --
--- Index pour la table `emprunt`
+-- Indexes for table `emprunt`
 --
 ALTER TABLE `emprunt`
   ADD KEY `emp_produit` (`emp_produit`),
   ADD KEY `VIS_MATRICULE` (`VIS_MATRICULE`);
 
 --
--- Index pour la table `produit`
+-- Indexes for table `produit`
 --
 ALTER TABLE `produit`
   ADD PRIMARY KEY (`prod_code`),
   ADD KEY `prod_categorie` (`prod_categorie`);
 
 --
--- Index pour la table `visiteur`
+-- Indexes for table `visiteur`
 --
 ALTER TABLE `visiteur`
   ADD PRIMARY KEY (`VIS_MATRICULE`),
@@ -184,28 +177,28 @@ ALTER TABLE `visiteur`
   ADD KEY `SEC_CODE` (`SEC_CODE`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `categorie`
+-- AUTO_INCREMENT for table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `cat_code` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cat_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `emprunt`
+-- Constraints for table `emprunt`
 --
 ALTER TABLE `emprunt`
   ADD CONSTRAINT `emp_produit` FOREIGN KEY (`emp_produit`) REFERENCES `produit` (`prod_code`),
   ADD CONSTRAINT `emprunt_ibfk_1` FOREIGN KEY (`VIS_MATRICULE`) REFERENCES `visiteur` (`VIS_MATRICULE`);
 
 --
--- Contraintes pour la table `produit`
+-- Constraints for table `produit`
 --
 ALTER TABLE `produit`
   ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`prod_categorie`) REFERENCES `categorie` (`cat_code`);

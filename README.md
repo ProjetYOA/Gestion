@@ -1,2 +1,1 @@
-## différentes actions restantes:
-test
+## page restituer : il suffit uniquement de cliquer sur l'id d'un produit pour le rendre disponible
