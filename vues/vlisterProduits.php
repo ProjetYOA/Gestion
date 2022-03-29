@@ -28,6 +28,7 @@ if (count($produit) > 0)
           <th>Image</th>
           <th>Hauteur</th>
           <th>Statut</th>
+          <th>Reserver</th>
          
          </tr>
 <?php
@@ -52,6 +53,8 @@ else
             <td ><img src="<?php echo $produit[$i]['image']?>" alt=""></td>
             <td ><?php echo $produit[$i]['hauteur']?></td>
             <td ><?php echo $produit[$i]['statut']?></td>
+            <td><a href="./reserver.php?ID=<?php echo $produit[$i]['prod_code']?>">Reserver</a></td>
+
            
          </tr>
 <?php
