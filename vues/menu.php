@@ -20,7 +20,7 @@
                       <li><a href="./listerVisiteur.php">Lister</a></li>
                       <li><a href="./ajouterVisiteur.php">Ajouter</a></li>
                       <li><a href="./RechercherVisiteur.php">Rechercher</a></li>
-                      <li><a href="./modifier.php">Modifier</a></li>
+                      <!-- <li><a href="./modifier.php">Modifier</a></li> -->
                       <li><a href="./supprimer.php">Supprimer</a></li>
 
                   </ul>
