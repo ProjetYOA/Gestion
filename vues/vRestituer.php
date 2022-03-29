@@ -28,16 +28,14 @@ if (count($prod) > 0)
          </tr>
 <?php
 }
-else
-{
- echo "<h2>Message erreur</h2>";
-}
+
 ?>
       </thead>
       <tbody>  
 <?php  
     $i = 0;
     echo "<h2>Restituer un produit :</h2>";
+    echo "<p>Pour rendre un produit appuyer sur son id</p>";
     echo "<br><br>";
     echo date('d-m-y h:i:s'); //date du jours
     while($i < count($prod))

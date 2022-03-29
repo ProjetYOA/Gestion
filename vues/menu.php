@@ -40,7 +40,7 @@
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">Actions<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                       <li><a href="./MaterielDispo.php">Produits disponibles</a></li>
-                      <li><a href="./reserver.php">Reserver</a></li>
+                      <!-- <li><a href="./reserver.php">Reserver</a></li> -->
                       <li><a href="./restituer.php">Restituer un produit</a></li>
                       <!-- <li><a href="./modifierProduit.php">Emprunter un produit</a></li> -->
 

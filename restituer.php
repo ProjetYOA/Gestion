@@ -16,7 +16,7 @@ $repVues = './vues/';
   $prod = listerProduitEmprunter();
   if(count($prod)==0)
   {
-    echo "ALERTE ROUGE";
+    echo '<script type="text/javascript"> alert(" produits  indisponible ")</script>';
   }
 
 include($repVues."entete.php") ;

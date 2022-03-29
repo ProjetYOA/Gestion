@@ -173,7 +173,7 @@ function Emprunter($dateE,$prod,$dateR,$unMatricule)
          '".$dateR."',
          '".$unMatricule."');"; 
          $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
-          echo $requete;
+          // echo $requete;
         
          // Si la requ�te a r�ussi
          if ($ok)
