@@ -1,13 +1,15 @@
 <script type="text/javascript">
 
 </script>
+<!-- <h3>Ajouter un visiteur :</h3>";   -->
+
 
 <!--Saisie des informations dans un formulaire!-->
 <div class="container">
 
 <form name="formAjouterVisiteur" action="" method="post" onSubmit="return valider()">
   <fieldset>
-    <legend>Entrez les coordonnées d'un visiteur pour l'ajouter </legend>
+    <legend>Entrez les coordonnées d'un visiteur pour l'ajouter : </legend>
     <label>Matricule :</label> <input type="text" name="matricule" size="20" /><br />
     <label>Nom :</label> <input type="text" name="nom" size="20" /><br />
     <label>Prenom :</label> <input type="text" name="prenom" size="10" /><br /> 

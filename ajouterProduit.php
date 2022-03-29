@@ -32,10 +32,11 @@ else
    $uneRef=$_POST["ref"];
    $uneDes=$_POST["des"];
    $unPrix=$_POST["prix"];
-   $uneImage=$_POST["image"];
+  //  $uneImage=$_POST["image"];
    $uneCat=$_POST["cat"];  
    $uneHauteur=$_POST["hauteur"];  
   ajouter($uneRef, $uneDes, $unPrix, $uneImage, $uneCat, $uneHauteur);
+  header('location:listerProduits.php');
 }
 
 // Construction de la page Rechercher

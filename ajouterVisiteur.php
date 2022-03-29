@@ -27,14 +27,21 @@ else
    $unSec=$_POST["sec"];
    $unLab=$_POST["code"];
    
-ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$unCp, $uneDate, $unSec,$unLab);
+$b=ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$unCp, $uneDate, $unSec,$unLab);
+if($b!=1)
+{
+  ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$unCp, $uneDate, $unSec,$unLab);
+  header('location:listerVisiteur.php');
+}
+else{
+  echo '<script type="text/javascript"> alert("Ce visiteur existe deja !")</script>';
+}
+
   }
 
 // Construction de la page Rechercher
-// pour l'affichage (appel des vues)
 include($repVues."entete.php") ;
 include($repVues."menu.php") ;
-// include($repVues ."erreur.php");
 include($repVues."vAjouterVisiteur.php") ;
 include($repVues."pied.php") ;
 ?>
