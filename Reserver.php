@@ -26,6 +26,7 @@ else
    
    Emprunter($dateE,$prod,$dateR,$unMatricule);
    statut($prod);
+   header('location:listerProduits.php');
   }
   $type="";
    if (isset($_GET['type_uti']))

@@ -3,10 +3,10 @@
 
 <div class="">
   <form class="" action="" method=POST>
-    <legend>Entrez les donnees sur un invité pour la recherche </legend><br>
+    <legend>Entrez les données sur un invité pour la recherche : </legend><br>
     <div class="">
       <input type="text" placeholder="Entrer Son nom ... " class="" name="nom" size="10"><br><br>
-      <button type="submit" class=""><i class="icon-search">Rechercher</i></button>
+      <button type="submit" class="">Rechercher</button>
       <button type="reset" class="">Annuler</button>
     </div>
   </form>

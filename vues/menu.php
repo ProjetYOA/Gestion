@@ -31,7 +31,7 @@
                       <li><a href="./listerProduits.php">Lister</a></li>
                       <li><a href="./ajouterProduit.php">Ajouter</a></li>
                       <li><a href="./RechercherProduit.php">Rechercher</a></li>
-                      <li><a href="./supprimerProduit">Supprimer</a></li>
+                      <li><a href="./supprimerProduit.php">Supprimer</a></li>
 
 
                   </ul>

@@ -98,6 +98,7 @@ function listerProduitEmprunter()
       $requete="SELECT p.prod_libelle,p.prod_code,v.VIS_PRENOM,e.emp_dateRetour,e.emp_date,v.VIS_NOM from emprunt e inner join visiteur v on v.VIS_MATRICULE = e.VIS_MATRICULE inner join produit p on e.emp_produit =  p.prod_code where e.statut='' or  e.statut='a rendre';";
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
        $prod= array();
+      //  echo $requete;
       $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le resultat soit recuperable sous forme d'objet     
       $i = 0;
       $ligne = $jeuResultat->fetch();
@@ -154,19 +155,7 @@ function Emprunter($dateE,$prod,$dateR,$unMatricule)
   {
       
            
-      $requete="select * from emprunt where emp_produit = '".$prod."';";
-      $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
-
-      $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
       
-      $ligne = $jeuResultat->fetch();
-      if($ligne)
-      {
-        $message="Echec de l'emprunt : Le produit n'est pa disponible !";
-      //   ajouterErreur($tabErr, $message);
-      }
-      else
-      {
         $requete="insert into emprunt (emp_date,emp_produit,emp_dateRetour,VIS_MATRICULE) values (
          '".$dateE."',
          '".$prod."',
@@ -186,7 +175,7 @@ function Emprunter($dateE,$prod,$dateR,$unMatricule)
            $message = "L'emprunt n'a pas ete ajoute !!!";
          //   ajouterErreur($tabErr, $message);
          } 
-        }
+        
       }
 
 
@@ -199,7 +188,7 @@ function listerProduit()
   {
       
            
-      $requete="select * from produit";
+      $requete="select * ,c.cat_nom from produit p inner join categorie c on c.cat_code=p.prod_categorie;";
     
       
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -217,6 +206,7 @@ function listerProduit()
           $produit[$i]['prod_image']=$ligne->prod_image;
           $produit[$i]['hauteur']=$ligne->hauteur;
           $produit[$i]['statut']=$ligne->statut;
+          $produit[$i]['cat_nom']=$ligne->cat_nom;
          
          
           $ligne=$jeuResultat->fetch();
@@ -272,10 +262,10 @@ function rendre($ID)
   {
       
         $a= date('d-m-y');
-      $requete="update emprunt set statut ='Rendu',emp_dateRetour=$a where emp_produit=$ID; update produit set statut  = 'Disponible' ;";
+      $requete="update emprunt set statut ='Rendu',emp_dateRetour='$a' where emp_produit=$ID; update produit set statut  = 'Disponible' ;";
        
       $jeuResultat=$connexion->query($requete);
-      echo $requete;
+      // echo $requete;
 
   }
 
@@ -292,7 +282,7 @@ function listerProduitDispo()
   {
       
            
-      $requete="select * from produit where Statut = 'Disponible';";
+      $requete="select *,c.cat_nom from produit p inner join categorie c on c.cat_code=p.prod_categorie where Statut = 'Disponible' ;";
     
       
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
@@ -310,6 +300,8 @@ function listerProduitDispo()
           $utilisateur[$i]['hauteur']=$ligne->hauteur;
           $utilisateur[$i]['statut']=$ligne->statut;
           $utilisateur[$i]['image']=$ligne->prod_image;
+          // $utilisateur[$i]['image']=$ligne->prod_image;
+          $utilisateur[$i]['cat_nom']=$ligne->cat_nom;
          
           $ligne=$jeuResultat->fetch();
           $i = $i + 1;
@@ -320,30 +312,33 @@ function listerProduitDispo()
   return $utilisateur;
     }
 }
+
+
 function ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$unCp, $uneDate, $unSec,$unLab)
 {
+  $A=0;
 
     // Ouvrir une connexion au serveur mysql en s'identifiant
    
     $connexion = connexionBdd();
         $requete="select * from visiteur";
-      $requete=$requete." where VIS_NOM = '".$unNom."';"; 
+      $requete=$requete." where VIS_MATRICULE = '".$unMatricule."';"; 
       $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
 
       $jeuResultat->setFetchMode(PDO::FETCH_OBJ); // on dit qu'on veut que le r�sultat soit r�cup�rable sous forme d'objet     
       
-      //echo ; 
+     
       $ligne = $jeuResultat->fetch();
       if($ligne)
       {
-        $message="Echec de l'ajout : l ID existe déja !";
+           $message="Echec de l'ajout : l ID existe déja !";
+           $A=1;
       //   ajouterErreur($tabErr, $message);
       }
       else
       {
           
-        if(strlen($unNom) <= 20 )
-        {
+        
               $requete="insert into visiteur"
             ."(VIS_MATRICULE,VIS_NOM ,VIS_PRENOM, VIS_ADRESSE, VIS_CP, VIS_VILLE, VIS_DATEEMBAUCHE, SEC_CODE, LAB_CODE) values ('"
             .$unMatricule."','"
@@ -365,6 +360,7 @@ function ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$un
               if ($ok)
               {
                 $message = "l'invite a bien ete ajoute";
+              
               //   ajouterErreur($tabErr, $message);
               }
               else
@@ -372,13 +368,10 @@ function ajouterVisiteur($unMatricule,$unNom,$unPrenom,$uneAdresse,$uneVille,$un
                 $message = "L'invite n'a pas ete ajoute !!!";
               //   ajouterErreur($tabErr, $message);
               }
-          }
-          else
-          {
-            echo" le nom doit composer maximun 20 caracteres";
-          }
+         
 
       }
+      return($A);
       
     }
 function listercat()
@@ -427,8 +420,7 @@ function ajouter($ref, $des, $prix, $image, $cat, $hauteur)
     }
     else
     {
-      if($hauteur >= 0 && $hauteur < 20)
-      {
+     
         $requete="insert into produit"
         ."(prod_code,prod_libelle,prod_prix,prod_image,prod_categorie, hauteur)  
         values ('"
@@ -444,7 +436,7 @@ function ajouter($ref, $des, $prix, $image, $cat, $hauteur)
          // FROM Table_Produit)
          // Lancer la requ�te d'ajout 
          $ok=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
-        
+        // echo $requete;
          // Si la requ�te a r�ussi
          if ($ok)
          {
@@ -456,11 +448,8 @@ function ajouter($ref, $des, $prix, $image, $cat, $hauteur)
            $message = "Attention, l'ajout de la fleur a �chou� !!!";
            
          }
-      }
-      else
-      {
-        echo"la hauteur doit etre comprise entre 0 et 20.";
-      }
+      
+     
 
     }
   
@@ -508,7 +497,7 @@ function rechercherProduit($uneDes)
   $connexion = connexionBdd();
     $produit = array();
       
-    $requete="select c.cat_nom, p.prod_libelle, p.prod_prix, p.prod_image, p.hauteur, p.statut from produit p inner join categorie c on c.cat_code=p.prod_categorie where prod_libelle like '".$uneDes."%';";
+    $requete="select c.cat_nom, p.prod_libelle,p.prod_code, p.prod_prix, p.prod_image, p.hauteur, p.statut from produit p inner join categorie c on c.cat_code=p.prod_categorie where prod_libelle like '".$uneDes."%';";
     $jeuResultat=$connexion->query($requete); // on va chercher tous les membres de la table qu'on trie par ordre croissant
   
     // Initialisationd e la cat�gorie trouv�e � : "aucune"
@@ -528,6 +517,7 @@ function rechercherProduit($uneDes)
         $produit[$i]['prod_image']=$ligne['prod_image'];
         $produit[$i]['hauteur']=$ligne['hauteur'];
         $produit[$i]['statut']=$ligne['statut'];
+        $produit[$i]['prod_code']=$ligne['prod_code'];
         $ligne=$jeuResultat->fetch();
         $i = $i + 1;
       }

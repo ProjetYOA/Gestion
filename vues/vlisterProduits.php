@@ -11,8 +11,12 @@
     {
 ?>
         <h3><?php echo $type;?></h3>
-<?php    
+<?php   
     }
+    echo "<h3>Liste de Produits :</h3>";  
+    echo "<p>Pour modifier un produit, cliquez sur son ID.</p>"; 
+
+
 ?>
       </caption>
       <thead>
@@ -25,18 +29,15 @@ if (count($produit) > 0)
           <th>catégorie</th>
           <th>Nom</th>
           <th>Prix</th>
-          <th>Image</th>
+          <!-- <th>Image</th> -->
           <th>Hauteur</th>
           <th>Statut</th>
-          <th>Reserver</th>
+          <!-- <th>Reserver</th> -->
          
          </tr>
 <?php
 }
-else
-{
- echo "<h1>Aucun client ne correspond � votre recherche</h1>";
-}
+
 ?>
       </thead>
       <tbody>  
@@ -47,13 +48,13 @@ else
  ?>     
         <tr>
             <td><a href="./modifierProduit.php?ID=<?php echo $produit[$i]['prod_code']?>"><?php echo $produit[$i]['prod_code']?></a></td>
-            <td><?php echo $produit[$i]['prod_libelle']?></td>
+            <td><?php echo $produit[$i]['cat_nom']?></td>
             <td><?php echo $produit[$i]['prod_libelle']?></td>
             <td ><?php echo $produit[$i]['prod_prix']?></td>
-            <td ><img src="<?php echo $produit[$i]['image']?>" alt=""></td>
+            <!-- <td ><img src="<?php echo $produit[$i]['image']?>" alt=""></td> -->
             <td ><?php echo $produit[$i]['hauteur']?></td>
             <td ><?php echo $produit[$i]['statut']?></td>
-            <td><a href="./reserver.php?ID=<?php echo $produit[$i]['prod_code']?>">Reserver</a></td>
+            <!-- <td><a href="./reserver.php?ID=<?php echo $produit[$i]['prod_code']?>">Reserver</a></td> -->
 
            
          </tr>

@@ -10,7 +10,7 @@ function valider(){
   }
   else {
     // sinon on affiche un message
-    alert("Le prix doit �tre positif !");
+    alert("Le prix doit etre positif !");
     // et on indique de ne pas envoyer le formulaire
     return false;
   }
@@ -27,7 +27,7 @@ function valider(){
     <label>Code du Produit : </label> <input type="text" placeholder="Entrer la r�f�rence �"name="ref" size="10" /><br />
     <label>Nom :</label> <input type="text" name="des" size="20" /><br />
     <label>Prix :</label> <input type="text" name="prix" size="10" /><br />
-    <label>Image :</label> <input type="text" name="image" size="20"/><br />    
+    <!-- <label>Image :</label> <input type="text" name="image" size="20"/><br />     -->
     <label>Categories :</label>
     <select name="cat">
     <?php

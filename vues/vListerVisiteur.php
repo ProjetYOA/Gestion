@@ -12,7 +12,7 @@
 ?>
         <h3><?php echo $cat;?></h3>
 <?php   
-echo "<h3>Lister de visiteurs :</h3>"; 
+echo "<h3>Liste de visiteurs :</h3>"; 
     }
 ?>
       </caption>
